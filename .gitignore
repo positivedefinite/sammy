@@ -1,0 +1,11 @@
+*.npy
+*.ipynb
+*.pyc
+*.neg
+*.neu
+*.pos
+*.h5
+models/*context
+data/semeval_nl
+data/semeval_combo
+models/stats/*-stats.*
