@@ -1,5 +1,7 @@
 # Sammy
-![](http://cubexsys.com/wp-content/uploads/2017/09/Words.png)
+<p align="center">
+  <img src="http://cubexsys.com/wp-content/uploads/2017/09/Words.png">
+</p>
 
 Sammy is a Sentiment Analysis Model for mixed tweets in dutch and english. It has an accuracy of 80% on a balanced set of positive and negative tweets with a symmetric error (similar number of false positives and false negatives). It is developed and maintained by the AI Team @ GroeiFabriek APG in Heerlen. Contributors are: Oskar Person, Praveen Koshy Sam, Bart Driessen, Ebrahim Hazrati and Koen Weterings.
 
@@ -20,7 +22,9 @@ There are 4 modules in the main code:
 
 ***4.	w2v:*** This model checks if the required word2vec model exists and if not it runs the word2vec model to train the word vectors.
 
-![](https://github.com/positivedefinite/sammy/blob/master/execution_flow.png)
+<p align="center">
+  <img src="https://github.com/positivedefinite/sammy/blob/master/execution_flow.png">
+</p>
 
 ## Main Code Modules in depth
 ### 1.	sammy
@@ -30,7 +34,9 @@ The program then sorts the data into the respective variables and separates the 
 The ‘stats’ file is created and then the word2vec model is trained via the w2v model.
 After this the layers for the convolutional neural network are defined. It first has the embedding layer followed by a dropout layer, then for each ‘filter_size’ it first does zero_padding, followed by a 1-D convolutional layer, which is then max_pooled and flattened. The outputs for the different filter_sizes are concatenated and dropout is performed again. The output from the dropout is passed through one dense layer with ReLU activation and through one dense layer with Sigmoid activation. The model is then compiled with ‘binary_crossentropy’ loss and the ‘adam’ optimizer. For a setup where there are two ‘filter_size’ defined, the network would like as shown below.
 
-![](https://github.com/positivedefinite/sammy/blob/master/model_architecture.png)
+<p align="center">
+  <img src="https://github.com/positivedefinite/sammy/blob/master/model_architecture.png">
+</p>
 
 The accuracy measurements are logged in a text file during the model training. The model developed is then saved in two parts. The model architecture is saved in a JSON file and the model weights are saved in .h5 file. The confusion matrix is generated and saved in the text file as well.
 The model files are saved in the ‘models’ folder and the stats files are stored in the ‘models/stats/’ folder
