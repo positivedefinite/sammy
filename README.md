@@ -2,7 +2,7 @@
 
 Sammy is a Sentiment Analysis Model for mixed tweets in dutch and english. It is developed and maintained by the AI Team @ GroeiFabriek APG in Heerlen. Contributors are: Oskar Person, Praveen Koshy Sam, Bart Driessen, Ebrahim Hazrati and Koen Weterings.
 
-The convoulational neural network is based on Alexander Rakhlin's repository that can be found here: https://github.com/alexander-rakhlin/CNN-for-Sentence-Classification-in-Keras. We have fine-tuned the metaparametrs and wrote a lot of code around the original network to handle mixed language tweets. In our repository you can also find code for easily predicting sentiment for thousands of tweets with pre-existing models. 
+This convolutional neural network is based on Alexander Rakhlin's repository that can be found here: https://github.com/alexander-rakhlin/CNN-for-Sentence-Classification-in-Keras. We have fine-tuned the metaparametrs and wrote a lot of code around the original network to handle mixed language tweets. In our repository you can also find code for easily predicting sentiment for thousands of tweets with pre-existing models. 
 
 You can find our best model, original semeval data and semeval data translated to dutch, at the dropbox: https://www.dropbox.com/sh/hka08rfh2n7d9bc/AAA7R1kPSzYlG47pLRrxlOKXa?dl=0
 
