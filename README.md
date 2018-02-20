@@ -4,12 +4,18 @@ This contains the code for training the sentiment analysis model on the SAM data
 
 ## The Code
 There are 4 modules in the main code:
+
 ***1.	sammy:*** This has the bulk of the code and calls the relevant modules as required. The hyperparameters for the model are set here and all files generated during the code execution are generated from here.
+
 ***2.	ETL:*** This is very minimal module that simply exists to call the data_helpers_neutrals module and to format the output.
+
 ***3.	data_helpers_neutrals:*** Here the data is loaded and cleaned. It also builds required data structures such as the vocabulary.
+
 ***4.	w2v:*** This model checks if the required word2vec model exists and if not it runs the word2vec model to train the word vectors.
 
-![](https://github.com/positivedefinite/sammy/blob/master/execution_flow.png)
+<p align="center">
+  <img src="https://github.com/positivedefinite/sammy/blob/master/execution_flow.png" alt="Execution Flow"/>
+</p>
 
 ## Main Code Modules in depth
 ### 1.	sammy
@@ -19,7 +25,9 @@ The program then sorts the data into the respective variables and separates the 
 The ‘stats’ file is created and then the word2vec model is trained via the w2v model.
 After this the layers for the convolutional neural network are defined. It first has the embedding layer followed by a dropout layer, then for each ‘filter_size’ it first does zero_padding, followed by a 1-D convolutional layer, which is then max_pooled and flattened. The outputs for the different filter_sizes are concatenated and dropout is performed again. The output from the dropout is passed through one dense layer with ReLU activation and through one dense layer with Sigmoid activation. The model is then compiled with ‘binary_crossentropy’ loss and the ‘adam’ optimizer. For a setup where there are two ‘filter_size’ defined, the network would like as shown below.
 
-![](https://github.com/positivedefinite/sammy/blob/master/model_architecture.png)
+<p align="center">
+  <img src="https://github.com/positivedefinite/sammy/blob/master/model_architecture.png" alt="Execution Flow"/>
+</p>
 
 The accuracy measurements are logged in a text file during the model training. The model developed is then saved in two parts. The model architecture is saved in a JSON file and the model weights are saved in .h5 file. The confusion matrix is generated and saved in the text file as well.
 The model files are saved in the ‘models’ folder and the stats files are stored in the ‘models/stats/’ folder
@@ -31,28 +39,38 @@ The ‘load_data’ function takes the same arguments as the ‘main’ function
 
 ### 3.	data_helpers_neutrals
 The data_helpers_neutrals module has 10 functions. Below you will find a description of each function.
+
 ***i.	load_data***
 This is the main function for this module that is referenced in the ETL module. It takes two arguments – fraction of dataset to load and the name of the dataset. It returns 5 objects – the annotated data, the labels for the annotated data, a dictionary with a unique word as key and a unique integer as the value, the list of unique words in the data and the neutral data. 
 The function loads data from the folder with the name set as the argument by calling the load_data_and_labels function. It then truncates the data based on the value set as the first argument to the function. The pad_tweets function is then called to pad each entry to the same length. The build_vocab function is called to generate the vocabulary from the data. Next up the build_input_data function is called to separate the tweets and the labels. The build_neutral_data function is then called to save the neutral data.
+
 ***ii.	load_data_and_labels***
 This function takes one argument – the name of the dataset to be loaded and returns the text from the files and the labels.
 It assumes there are two different files for each dataset – a positive data file and a negative data file. It will open both files and read the data and concatenates them into one variable. clean_str is then called to clean the data and to make it match an expected format. The labels are also concatenated to one variable.
+
 ***iii.	load_neutral_data***
 This function takes one argument – the name of the dataset to be loaded and returns the neutral data from the respective file. The location for the neutral data has to be manually specified for this. It shuffles the neutral data and then runs clean_str to make it adhere to the specified format. It returns the cleaned neutral data after.
+
 ***iv.	clean_str***
 This function takes a string and returns the cleaned string. For cleaning it using regular expressions via the python package ‘re’. It first replaces URLs by a tag ‘_url_’ and Twitter user tags by ‘_usernaem_’. It then replaces 11 types of emoticons with a tag, this is so that information from emoticons is not lost when the cleaning removes punctuation. Unnecessary punctuation is then removed and common English grammatical usages are corrected for to avoid the model to recount a word as unique simply because it has one of the grammatical tails attached to it.
+
 ***v.	pad_sentences***
 This is a legacy function that has been superseded by pad_tweets. It performs the same function as pad_tweets, except that it would have to be called separately for both the annotated and the neutral data, while pad_tweets can perform padding for both annotated and neutral data together and return them separately.
+
 ***vi.	pad_tweets***
 This function takes three arguments – the annotated data, the neutral data and the padding word (default = ‘<PAD/>’). It returns the padded data for both the annotated and the neutral data.
 There is a method to define the ‘sequence_length’ as the maximum length for sequences in the data, however in practice this was found to be faulty as there would generally be at least one sequence which is extremely large reducing the significance of the rest of the data, hence after some study of the SAM tweet dataset it was decided that the ‘sequence_length’ would be specified as 40 for that dataset.
 There is a function defined within this function called pad that takes in all the data and the required ‘sequence_length’, it then pads the data to the specified length. If the sequence is larger than the ‘sequence_length’ then it is truncated and returned.
+
 ***vii.	build_vocab***
 This function takes as argument the sentences in the data, it then returns both a dictionary that maps from the words to an index and a list of words. It finds the unique words in the data in decreasing order of their frequency using a function ‘Counter’ from the python module ‘collections’.
+
 ***viii.	build_input_data***
 This function takes three arguments – the sentences from the data, the labels and the dictionary that maps each word in the vocabulary to a unique integer. It returns two ‘numpy’ arrays – one with the data and the other with the labels. The model trains on ‘numpy’ arrays that have integer values for each word and this function helps build that input. It creates a ‘numpy’ array for the data by mapping each word to its corresponding integer value. It transforms the labels to a ‘numpy’ array as well.
+
 ***ix.	build_neutral_data***
 This creates a numpy array the same as in the build_input_data function for the neutral data. It takes as input the neutral data and the dictionary that maps each word in the vocabulary to a unique integer. It returns the ‘numpy’ array for the neutral data.
+
 ***x.	batch_iter***
 This is a legacy  function that has not been used at all. It might have been a more efficient way to load the data but it uses packages we are not used to, so we have just let it be and not spend much time on it.
 
@@ -62,6 +80,7 @@ The function first assigns a name to the word embedding model based on the value
 
 ## Auxiliary modules
 There are 3 auxiliary modules
+
 ### 1.	classify_sentiment
 This module calculates the sentiment in the form the probability (between 0 and 1) for a set of input sentences. If labels are available, it also calculates the accuracy on the whole set. To be able to do prediction for new sentences, each sentence first has to go through the same pre-processing steps as for the training set. The prediction is done in the function ‘label_tweets’. There is another function called ‘language_detection’ which is used to separate Dutch and English tweets. It takes as input a trained keras model <model>.h5, a vocabulary dictionary and a file with tweets to test and outputs probability and accuracy.
 
