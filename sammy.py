@@ -21,12 +21,12 @@ settings = {'file_name' : time.strftime("%Y%m%d-%H%M%S-")+' Default Experiment',
             'load_data' : True,
             'save_stats' : True, 
             'save_model' : True,
-	         'dataset_name': ['semeval_combo']
+	         'dataset_name': ['semeval_en']
             }
 
 print('Current Settings are as follows : \n' + '\tFile Name = ' + str(settings['file_name']) + '\n\tLoad data from .npy file = ' + str(settings['load_data']))
 print('\tSave Stats file = ' + str(settings['save_stats']) + '\n\tSave Model file = ' + str(settings['save_model']) + '\n\tDataset Name = ' + str(settings['dataset_name'][0]))
-do_you_want_a_default_run = input("Do you want to change any of these settings? (Y/N) ----> ")
+do_you_want_a_default_run = input("Do you want to change these settings? (Y/N) ----> ")
 while do_you_want_a_default_run not in ['Y','N','y','n']:
     do_you_want_a_default_run = input("Sorry that input was invalid, please enter either Y or N. Do you want to change any of these settings? ")
 if do_you_want_a_default_run in ['Y','y']:
