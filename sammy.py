@@ -61,7 +61,7 @@ if do_you_want_a_default_run in ['Y','y']:
         timestr = time.strftime("%Y%m%d-%H%M%S ")
         settings['file_name'] = timestr + experiment_name
     print('New Settings are as follows : \n' + '\tFile Name = ' + str(settings['file_name']) + '\n\tLoad data from .npy file = ' + str(settings['load_data']))
-    print('\n\tSave Stats file = ' + str(settings['save_stats']) + '\n\tSave Model file = ' + str(settings['save_model']) + '\n\tDataset Name = ' + str(settings['dataset_name'][0]))
+    print('\tSave Stats file = ' + str(settings['save_stats']) + '\n\tSave Model file = ' + str(settings['save_model']) + '\n\tDataset Name = ' + str(settings['dataset_name'][0])+'\n')
 #loads both annotated and neutral tweets
 if settings['load_data']==False:
     x_train, y_train, x_test, y_test, vocabulary_inv, neutral_tweets = ETL.main(settings['dataset_name'], 1, 0.8)
