@@ -19,46 +19,56 @@ from sklearn import metrics
 settings = {'file_name' : time.strftime("%Y%m%d-%H%M%S-")+' Default Experiment', 
             'default_run' : True, 
             'load_data' : True,
-            'save_stats' : False, 
-            'save_model' : False,
-	    'dataset_name': ['semeval_nl']
+            'save_stats' : True, 
+            'save_model' : True,
+	         'dataset_name': ['semeval_combo']
             }
 
-do_you_want_a_default_run = input("Do you want to run the whole pipeline with default settings? (Y/N)")
-if do_you_want_a_default_run=='N':
+print('Current Settings are as follows : \n' + '\tFile Name = ' + str(settings['file_name']) + '\n\tLoad data from .npy file = ' + str(settings['load_data']))
+print('\tSave Stats file = ' + str(settings['save_stats']) + '\n\tSave Model file = ' + str(settings['save_model']) + '\n\tDataset Name = ' + str(settings['dataset_name'][0]))
+do_you_want_a_default_run = input("Do you want to change any of these settings? (Y/N) ----> ")
+while do_you_want_a_default_run not in ['Y','N','y','n']:
+    do_you_want_a_default_run = input("Sorry that input was invalid, please enter either Y or N. Do you want to change any of these settings? ")
+if do_you_want_a_default_run in ['Y','y']:
     settings['default_run'] = False
     # Load data
     load_data = input("Do you want to load data from .npy file? (Y/N) ----> ")
-    while load_data not in ['Y','N']:
+    while load_data not in ['Y','N','y','n']:
     	load_data = input("Sorry that input was invalid, please enter either Y or N. Do you want to save the STATS file ----> ")
-    if load_data=='N':
+    if load_data in ['N','n']:
         settings['load_data']=False
     # Save statistics
     save_stats = input("Do you want to save the STATS file from this experiment (Y/N) ----> ")
-    while save_stats not in ['Y','N']:
+    while save_stats not in ['Y','N','y','n']:
     	save_stats = input("Sorry that input was invalid, please enter either Y or N. Do you want to save the STATS file ----> ")
-    if save_stats=='Y':
+    if save_stats in ['Y','y']:
         settings['save_stats']=True
+    else:
+        settings['save_stats']=False
     # Save model
     save_model = input("Do you want to save the MODEL for this experiment (Y/N) ----> ")
-    while save_model not in ['Y','N']:
+    while save_model not in ['Y','N','y','n']:
     	save_model = input("Sorry that input was invalid, please enter either Y or N. Do you want to save the MODEL file ----> ")
-    if save_model=='Y':
+    if save_model in ['Y','y']:
         settings['save_model']=True
-    experiment_name = input("Enter a short yet descriptive name for this experiment:\n----> ")
-    timestr = time.strftime("%Y%m%d-%H%M%S ")
-    settings['file_name'] = timestr + experiment_name
-
-print(settings)
-
-
+    else:
+        settings['save_model']=False
+    change_name = input("Do you want to change the name for this experiment (Y/N) ----> ")
+    while change_name not in ['Y','N','y','n']:
+    	change_name = input("Sorry that input was invalid, please enter either Y or N. Do you want to change the name for this experiment ----> ")
+    if change_name in ['Y','y']:
+        experiment_name = input("Enter a short yet descriptive name for this experiment:\n----> ")
+        timestr = time.strftime("%Y%m%d-%H%M%S ")
+        settings['file_name'] = timestr + experiment_name
+    print('New Settings are as follows : \n' + '\tFile Name = ' + str(settings['file_name']) + '\n\tLoad data from .npy file = ' + str(settings['load_data']))
+    print('\n\tSave Stats file = ' + str(settings['save_stats']) + '\n\tSave Model file = ' + str(settings['save_model']) + '\n\tDataset Name = ' + str(settings['dataset_name'][0]))
 #loads both annotated and neutral tweets
 if settings['load_data']==False:
     x_train, y_train, x_test, y_test, vocabulary_inv, neutral_tweets = ETL.main(settings['dataset_name'], 1, 0.8)
-    np.save('data/'+'semeval_nl'+'/'+'input_data.npy',[x_train, y_train, x_test, y_test, vocabulary_inv, neutral_tweets])
+    np.save('data/'+str(settings['dataset_name'][0])+'/'+'input_data.npy',[x_train, y_train, x_test, y_test, vocabulary_inv, neutral_tweets])
 else:
     print('Loading data...')
-    input_data = np.load('data/settings['dataset_name'][0]/input_data.npy')
+    input_data = np.load('data/'+str(settings['dataset_name'][0])+'/input_data.npy')
     x_train = input_data[0]
     y_train = input_data[1]
     x_test = input_data[2]

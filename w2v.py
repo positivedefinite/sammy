@@ -5,7 +5,7 @@ import os
 import numpy as np
 
 
-def train_word2vec(sentence_matrix, vocabulary_inv,
+def train_word2vec(sentence_matrix, dataset, vocabulary_inv,
                    num_features=300, min_word_count=1, context=10):
     """
     Trains, saves, loads Word2Vec model
@@ -19,7 +19,7 @@ def train_word2vec(sentence_matrix, vocabulary_inv,
     context         # Context window size 
     """
     model_dir = 'models'
-    model_name = "{:d}features_{:d}minwords_{:d}context".format(num_features, min_word_count, context)
+    model_name = "{:}_{:d}features_{:d}minwords_{:d}context".format(dataset[0], num_features, min_word_count, context)
     model_name = join(model_dir, model_name)
     if exists(model_name):
         embedding_model = word2vec.Word2Vec.load(model_name)

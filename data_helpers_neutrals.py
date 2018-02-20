@@ -66,7 +66,7 @@ def load_neutral_data(dataset_name):
 #    neutral_examples = list(open('data/'+str(dataset_name)+'/'+str(dataset_name)+'.neu', encoding="utf-8").readlines())
 #    neutral_examples = pd.read_csv('data/'+str(dataset_name)+'/'+'sam_data.tsv', sep='\t', encoding = 'utf-8',  header=None, error_bad_lines=False) 
 #    neutral_examples = pd.read_csv('data/'+str(dataset_name)+'/'+'eng_sam.tsv', sep='\t', encoding = 'utf-8',  header=None, error_bad_lines=False, nrows=1000)
-    neutral_examples = pd.read_csv('data/semeval/'+'semeval.neu', sep='\t', encoding = 'utf-8',  header=None, error_bad_lines=False)#, nrows=10000)
+    neutral_examples = pd.read_csv('data/semeval_combo/'+'semeval_combo.neu', sep='\t', encoding = 'utf-8',  header=None, error_bad_lines=False)#, nrows=10000)
     shuffle_indices = np.random.permutation(np.arange(len(neutral_examples)))
     neutral_examples = neutral_examples.iloc[shuffle_indices]
 #    neutral_sample = int(len(neutral_examples)*0.10)
