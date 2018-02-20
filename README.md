@@ -1,4 +1,4 @@
-# Sammy
+# Sammy[http://cubexsys.com/wp-content/uploads/2017/09/Words.png](https://github.com/positivedefinite/sammy)
 
 Sammy is a Sentiment Analysis Model for mixed tweets in dutch and english. It has an accuracy of 80% on a balanced set of positive and negative tweets with a symmetric error (similar number of false positives and false negatives). It is developed and maintained by the AI Team @ GroeiFabriek APG in Heerlen. Contributors are: Oskar Person, Praveen Koshy Sam, Bart Driessen, Ebrahim Hazrati and Koen Weterings.
 
