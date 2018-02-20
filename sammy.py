@@ -80,24 +80,10 @@ else:
 
 ### Part 2A: Hyperparameters
 """
-Train convolutional network for sentiment analysis on IMDB corpus. Based on
+Original convolutional network for sentiment analysis on IMDB corpus. Based on
 "Convolutional Neural Networks for Sentence Classification" by Yoon Kim
 http://arxiv.org/pdf/1408.5882v2.pdf
-
-For "CNN-rand" and "CNN-non-static" gets to 88-90%, and "CNN-static" - 85% after 2-5 epochs with following settings:
-embedding_dim = 50          
-filter_sizes = (3, 8)
-num_filters = 10
-dropout_prob = (0.5, 0.8)
-hidden_dims = 50
-
-Differences from original article:
-- larger IMDB corpus, longer sentences; sentence length is very important, just like data size
-- smaller embedding dimension, 50 instead of 300
-- 2 filter sizes instead of original 3
-- fewer filters; original work uses 100, experiments show that 3-10 is enough;
-- random initialization is no worse than word2vec init on IMDB corpus
-- sliding Max Pooling instead of original Global Pooling
+Our team has taken this code from https://github.com/alexander-rakhlin/CNN-for-Sentence-Classification-in-Keras and adjusted the hyperparameters
 """
 
 np.random.seed(0)
