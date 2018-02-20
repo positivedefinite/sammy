@@ -21,7 +21,7 @@ settings = {'file_name' : time.strftime("%Y%m%d-%H%M%S-")+' Default Experiment',
             'load_data' : True,
             'save_stats' : False, 
             'save_model' : False,
-            #'file_name' : 'mixedTest'
+	    'dataset_name': ['semeval_nl']
             }
 
 do_you_want_a_default_run = input("Do you want to run the whole pipeline with default settings? (Y/N)")
@@ -54,11 +54,11 @@ print(settings)
 
 #loads both annotated and neutral tweets
 if settings['load_data']==False:
-    x_train, y_train, x_test, y_test, vocabulary_inv, neutral_tweets = ETL.main(['semeval_nl'], 1, 0.8)
+    x_train, y_train, x_test, y_test, vocabulary_inv, neutral_tweets = ETL.main(settings['dataset_name'], 1, 0.8)
     np.save('data/'+'semeval_nl'+'/'+'input_data.npy',[x_train, y_train, x_test, y_test, vocabulary_inv, neutral_tweets])
 else:
     print('Loading data...')
-    input_data = np.load('data/python/input_data.npy')
+    input_data = np.load('data/settings['dataset_name'][0]/input_data.npy')
     x_train = input_data[0]
     y_train = input_data[1]
     x_test = input_data[2]
@@ -142,7 +142,7 @@ print("Vocabulary Size: {:d}".format(len(vocabulary_inv)))
 print("Model type is", model_type)
 if model_type in ["CNN-non-static", "CNN-static"]:
     print('Initiating word2vec.')
-    embedding_weights = train_word2vec(np.vstack((x_train, x_test, neutral_tweets)), vocabulary_inv, num_features=embedding_dim,
+    embedding_weights = train_word2vec(np.vstack((x_train, x_test, neutral_tweets)), settings['dataset_name'], vocabulary_inv, num_features=embedding_dim,
                                        min_word_count=min_word_count, context=context)
     print('Word2vec done.')
     if model_type == "CNN-static":
