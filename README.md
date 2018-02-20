@@ -1,10 +1,10 @@
 # Sammy
 
-Sammy is a Sentiment Analysis Model for mixed tweets in dutch and english. It is developed and maintained by the AI Team @ GroeiFabriek APG in Heerlen. Contributors are: Oskar Person, Praveen Koshy Sam, Bart Driessen, Ebrahim Hazrati and Koen Weterings.
+Sammy is a Sentiment Analysis Model for mixed tweets in dutch and english. It has an accuracy of 80% on a balanced set of positive and negative tweets with a symmetric error (similar number of false positives and false negatives). It is developed and maintained by the AI Team @ GroeiFabriek APG in Heerlen. Contributors are: Oskar Person, Praveen Koshy Sam, Bart Driessen, Ebrahim Hazrati and Koen Weterings.
 
-This convolutional neural network is based on Alexander Rakhlin's repository that can be found here: https://github.com/alexander-rakhlin/CNN-for-Sentence-Classification-in-Keras. We have fine-tuned the metaparametrs and wrote a lot of code around the original network to handle mixed language tweets. In our repository you can also find code for easily predicting sentiment for thousands of tweets with pre-existing models. 
+This convolutional neural network is based on Alexander Rakhlin's repository that can be found here: https://github.com/alexander-rakhlin/CNN-for-Sentence-Classification-in-Keras. We have adapted his code to handle twitter data instead of imdb, fine-tuned the metaparametrs and wrote a lot of code around the original network to handle mixed language tweets. In our repository you can also find code for easily predicting sentiment for thousands of tweets with pre-existing models. 
 
-You can find our best model, original semeval data and semeval data translated to dutch, at the dropbox: https://www.dropbox.com/sh/hka08rfh2n7d9bc/AAA7R1kPSzYlG47pLRrxlOKXa?dl=0
+You can find our best model, original semeval twitter data and semeval data translated to dutch, at the dropbox: https://www.dropbox.com/sh/hka08rfh2n7d9bc/AAA7R1kPSzYlG47pLRrxlOKXa?dl=0
 
 We have also created a knowledge sharing presentation explaining the workings of a CNN to our fellow colleagues in data science. You can contact us if you wish to use those in-depth educational materials.
 
