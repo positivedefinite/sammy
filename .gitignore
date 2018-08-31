@@ -9,3 +9,9 @@ models/*context
 data/semeval_nl
 data/semeval_combo
 models/stats/*-stats.*
+models/20180220-174505 semeval_en_50Batch_json.json
+models/20180220-174505 semeval_en_50Batch-stats.txt
+experiments.tsv
+data/semeval_en/semeval_en_50features_10minwords_5context
+data/semeval/50features_10minwords_5context
+data/semeval_en/semeval_en_50features_10minwords_5context

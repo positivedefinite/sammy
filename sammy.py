@@ -21,7 +21,7 @@ settings = {'file_name' : time.strftime("%Y%m%d-%H%M%S-")+' Default Experiment',
             'load_data' : True,
             'save_stats' : True, 
             'save_model' : True,
-	         'dataset_name': ['semeval_en']
+	         'dataset_name': ['semeval']
             }
 
 print('Current Settings are as follows : \n' + '\tFile Name = ' + str(settings['file_name']) + '\n\tLoad data from .npy file = ' + str(settings['load_data']))
